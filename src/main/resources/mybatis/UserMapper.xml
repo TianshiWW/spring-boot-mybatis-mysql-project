@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spring.project.springboot.dao.UserDao">
+    <select id="getAllUser" resultType="com.spring.project.springboot.domain.User" >
+        SELECT * FROM user;
+    </select>
+
+    <select id="getUserByEmail" parameterType="string" resultType="com.spring.project.springboot.domain.User" >
+        SELECT * FROM user WHERE emailAddress=#{email};
+    </select>
+
+    <insert id="insertUser" parameterType="com.spring.project.springboot.domain.User" useGeneratedKeys="true" >
+        insert into
+            user(firstName, lastName, emailAddress)
+        values
+            (#{firstName},#{lastName},#{emailAddress})
+    </insert>
+</mapper>

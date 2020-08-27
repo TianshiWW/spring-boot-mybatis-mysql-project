@@ -1,31 +1,35 @@
 package com.spring.project.springboot.controller;
 
-import com.spring.project.springboot.model.Employee;
+import com.spring.project.springboot.domain.User;
 import com.spring.project.springboot.service.UserService;
-import org.apache.ibatis.annotations.Param;
+import com.spring.project.springboot.utils.SignUpUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController
+@Controller
 public class UserController {
     @Autowired
     UserService userService;
 
     @GetMapping(value = "/getAllUser")
-    public List<Employee> getAllUser() {
+    public List<User> getAllUser() {
         return userService.getAllUser();
     }
 
-    @PostMapping(value = "/insert")
-    public void insert(@Param("id") int id,
-                       @Param("firstName") String firstName,
-                       @Param("lastName") String lastName,
-                       @Param("emailAddress") String emailAddress) {
-        Employee employee = new Employee(id, firstName, lastName, emailAddress);
-        userService.insertUser(employee);
+    @PostMapping("/signup")
+    public String signUp(@ModelAttribute User user, Model model) {
+        if (SignUpUtils.isUserExisted(user.getEmailAddress())) {
+            model.addAttribute("user", new User());
+        } else {
+            userService.insertUser(user);
+            model.addAttribute("user", user);
+        }
+        return "signupsuccess";
     }
 }

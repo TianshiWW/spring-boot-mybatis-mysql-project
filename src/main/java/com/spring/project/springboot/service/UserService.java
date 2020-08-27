@@ -1,14 +1,15 @@
 package com.spring.project.springboot.service;
 
-import com.spring.project.springboot.model.Employee;
-import com.spring.project.springboot.model.User;
+import com.spring.project.springboot.domain.User;
 
 import java.util.List;
 
 
 public interface UserService {
 
-    List<Employee> getAllUser();
+    List<User> getAllUser();
 
-    void insertUser(Employee employee);
+    void insertUser(User user);
+
+    User getUserByEmail(String email);
 }
