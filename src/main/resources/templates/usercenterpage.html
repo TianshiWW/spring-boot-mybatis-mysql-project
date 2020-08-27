@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>User Center</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>User Center</h1>
+<div th:if="${errorMsg}" th:text="${errorMsg}"/>
+<div th:unless="${errorMsg}">
+    <p th:text="'Hello, ' + ${user.firstName}" />
+    <p th:text="'id: ' + ${user.id}" />
+    <p th:text="'email: ' + ${user.emailAddress}" />
+</div>
+
+<!--<a href="/home">Submit another message</a>-->
+</body>
+</html>

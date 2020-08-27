@@ -10,25 +10,24 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.List;
-
 @Controller
-public class UserController {
+public class SignUpController {
     @Autowired
     UserService userService;
 
-    @GetMapping(value = "/getAllUser")
-    public List<User> getAllUser() {
-        return userService.getAllUser();
+    @GetMapping("/signup")
+    public String sign(Model model) {
+        model.addAttribute("user", new User());
+        return "signup";
     }
 
     @PostMapping("/signup")
     public String signUp(@ModelAttribute User user, Model model) {
         if (SignUpUtils.isUserExisted(user.getEmailAddress())) {
-            model.addAttribute("user", new User());
+            model.addAttribute("message", "error");
         } else {
             userService.insertUser(user);
-            model.addAttribute("user", user);
+            model.addAttribute("message", "success");
         }
         return "signupsuccess";
     }

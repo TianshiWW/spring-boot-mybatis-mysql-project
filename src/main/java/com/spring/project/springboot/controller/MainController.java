@@ -7,9 +7,8 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class MainController {
-    @RequestMapping (value = "/home", method = RequestMethod.GET)
-    public String helloWorld(@RequestParam(name ="name", required = false, defaultValue = "world") String name, Model model) {
-        model.addAttribute("user", new User());
-        return "home";
+    @GetMapping("/")
+    public String helloWorld() {
+        return "welcomepage";
     }
 }

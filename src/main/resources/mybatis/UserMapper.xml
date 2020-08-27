@@ -11,8 +11,8 @@
 
     <insert id="insertUser" parameterType="com.spring.project.springboot.domain.User" useGeneratedKeys="true" >
         insert into
-            user(firstName, lastName, emailAddress)
+            user(firstName, lastName, emailAddress, password)
         values
-            (#{firstName},#{lastName},#{emailAddress})
+            (#{firstName},#{lastName},#{emailAddress},#{password})
     </insert>
 </mapper>
